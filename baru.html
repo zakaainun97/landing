@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="fav.png" type="image/png"> <!-- Perbaiki type untuk favicon -->
+    <title>Halaman Artikel</title>
+    <link rel="stylesheet" href="article.css">
+    <style>
+        /* Tambahkan CSS untuk slider */
+        .slider {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .slides {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .slide {
+            min-width: 100%;
+            box-sizing: border-box;
+        }
+
+        .slide img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .dots {
+            text-align: center;
+            padding: 10px;
+        }
+
+        .dot {
+            display: inline-block;
+            height: 15px;
+            width: 15px;
+            margin: 0 2px;
+            background-color: #bbb;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .dot.active {
+            background-color: #717171;
+        }
+
+        /* Gaya popup */
+        .popup {
+            position: fixed;
+            bottom: -100%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            max-width: 300px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            text-align: center;
+            transition: bottom 0.5s ease;
+        }
+
+        .popup.show {
+            bottom: 20px;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: transparent;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        /* Gaya tombol scroll-up */
+        .scroll-up {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: none;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <a href="index.html"><img src="logo.png" alt="Logo" class="logo"></a>
+        <div class="nav" id="navMenu">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="disclaimer.html">Disclaimer</a>
+            <a href="privacy-policy.html">Privacy Policy</a>
+            <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
+        </div>
+        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+    </div>
+
+    <div class="content">
+        <article>
+            <h1>Judul Artikel</h1>
+            <p>Isi artikel di sini...</p>
+        </article>
+
+        <!-- style 1 -->
+        <h2>Style Satu</h2>
+        <img src="1.png" alt="Top Image" style="width:100%;">
+        <h3>Get This Looks</h3>
+
+        <div class="slider" id="slider">
+            <div class="slides">
+                <div class="slide"><img src="2.png" alt="Image 1"></div>
+                <div class="slide"><img src="3.png" alt="Image 2"></div>
+                <div class="slide"><img src="4.png" alt="Image 3"></div>
+            </div>
+            <div class="dots" id="dots">
+                <span class="dot" onclick="currentSlide(0)"></span>
+                <span class="dot" onclick="currentSlide(1)"></span>
+                <span class="dot" onclick="currentSlide(2)"></span>
+            </div>
+        </div>
+        <!-- style 1 end -->
+
+    </div>
+
+    <div id="myPopup" class="popup">
+        <button class="close-btn" onclick="tutupPopUp()">X</button>
+        <p>We may receive a small affiliate commission should you make a purchase from product links contained in our articles. Check out <a href="https://colorlib.eu.org/affiliate-disclosure.html">our affiliate disclosure</a> for further information. We appreciate your support!</p>
+    </div>
+
+    <button class="scroll-up" onclick="scrollToTop()">↑</button>
+
+    <script>
+        // Fungsi untuk menampilkan pop-up
+        function tampilkanPopUp() {
+            const popup = document.getElementById("myPopup");
+            popup.classList.add("show");
+        }
+
+        // Fungsi untuk menutup pop-up
+        function tutupPopUp() {
+            const popup = document.getElementById("myPopup");
+            popup.classList.remove("show");
+        }
+
+        // Menambahkan event listener agar pop-up muncul ketika halaman selesai dimuat
+        window.onload = tampilkanPopUp;
+
+        let currentIndex = 0;
+        const slides = document.querySelector('.slides');
+        const totalSlides = slides.children.length;
+        const dots = document.querySelectorAll('.dot');
+
+        function showSlide(index) {
+            if (index >= totalSlides) {
+                currentIndex = 0;
+            } else if (index < 0) {
+                currentIndex = totalSlides - 1;
+            } else {
+                currentIndex = index;
+            }
+            slides.style.transform = `translateX(-${currentIndex * 100}%)`;
+            updateDots();
+        }
+
+        function updateDots() {
+            dots.forEach((dot, i) => {
+                dot.className = dot.className.replace(' active', '');
+                if (i === currentIndex) {
+                    dot.className += ' active';
+                }
+            });
+        }
+
+        function handleSwipe() {
+            let startX, endX;
+
+            slides.addEventListener('touchstart', function(event) {
+                startX = event.touches[0].clientX;
+            });
+
+            slides.addEventListener('touchend', function(event) {
+                endX = event.changedTouches[0].clientX;
+                const diffX = startX - endX;
+                if (Math.abs(diffX) > 50) {
+                    if (diffX > 0) {
+                        showSlide(currentIndex + 1);
+                    } else {
+                        showSlide(currentIndex - 1);
+                    }
+                }
+            });
+        }
+
+        handleSwipe();
+
+        function toggleMenu() {
+            const navMenu = document.getElementById('navMenu');
+            if (navMenu.style.display === "flex") {
+                navMenu.style.display = "none";
+            } else {
+                navMenu.style.display = "flex";
+            }
+        }
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        window.onscroll = function() {
+            const scrollUpButton = document.querySelector('.scroll-up');
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                scrollUpButton.style.display = "block";
+            } else {
+                scrollUpButton.style.display = "none";
+            }
+        };
+
+        function currentSlide(index) {
+            showSlide(index);
+        }
+
+        showSlide(currentIndex); // Show the first slide initially
+    </script>
+
+</body>
+</html>
