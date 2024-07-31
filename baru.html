@@ -3,95 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="fav.png" type="image/png"> <!-- Perbaiki type untuk favicon -->
+    <link rel="icon" href="fav.png" type=".png">
     <title>Halaman Artikel</title>
-    <link rel="stylesheet" href="article.css">
-    <style>
-        /* Tambahkan CSS untuk slider */
-        .slider {
-            position: relative;
-            overflow: hidden;
-            width: 100%;
-        }
-
-        .slides {
-            display: flex;
-            transition: transform 0.5s ease;
-        }
-
-        .slide {
-            min-width: 100%;
-            box-sizing: border-box;
-        }
-
-        .slide img {
-            width: 100%;
-            border-radius: 10px;
-        }
-
-        .dots {
-            text-align: center;
-            padding: 10px;
-        }
-
-        .dot {
-            display: inline-block;
-            height: 15px;
-            width: 15px;
-            margin: 0 2px;
-            background-color: #bbb;
-            border-radius: 50%;
-            cursor: pointer;
-        }
-
-        .dot.active {
-            background-color: #717171;
-        }
-
-        /* Gaya popup */
-        .popup {
-            position: fixed;
-            bottom: -100%;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80%;
-            max-width: 300px;
-            padding: 20px;
-            background-color: #fff;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            border-radius: 8px;
-            text-align: center;
-            transition: bottom 0.5s ease;
-        }
-
-        .popup.show {
-            bottom: 20px;
-        }
-
-        .close-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background-color: transparent;
-            border: none;
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-        /* Gaya tombol scroll-up */
-        .scroll-up {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            display: none;
-            background-color: #333;
-            color: #fff;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-    </style>
+    <link rel="stylesheet" href="baru.css">
 </head>
 <body>
 
@@ -113,24 +27,29 @@
             <p>Isi artikel di sini...</p>
         </article>
 
-        <!-- style 1 -->
+<!-- style 1 -->
         <h2>Style Satu</h2>
         <img src="image/1.png" alt="Top Image" style="width:100%;">
         <h3>Get This Looks</h3>
 
         <div class="slider" id="slider">
-            <div class="slides">
-                <div class="slide"><img src="image/2.png" alt="Image 1"></div>
-                <div class="slide"><img src="image/3.png" alt="Image 2"></div>
-                <div class="slide"><img src="image/4.png" alt="Image 3"></div>
+            <div class="slides active">
+                <a href="image/2.png"><img src="image/3.png" alt="Slide 1"></a>
             </div>
-            <div class="dots" id="dots">
-                <span class="dot" onclick="currentSlide(0)"></span>
-                <span class="dot" onclick="currentSlide(1)"></span>
-                <span class="dot" onclick="currentSlide(2)"></span>
+            <div class="slides">
+                <a href="image/3.png"><img src="image/2.png" alt="Slide 2"></a>
+            </div>
+            <div class="slides">
+                <a href="image/4.png"><img src="image/4.png" alt="Slide 3"></a>
             </div>
         </div>
-        <!-- style 1 end -->
+
+        <div class="dot-container">
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+        </div>
+<!-- style 1 end -->
 
     </div>
 
@@ -142,8 +61,32 @@
     <button class="scroll-up" onclick="scrollToTop()">↑</button>
 
     <script>
+
+let slideIndex = 1;
+        showSlides(slideIndex);
+
+        function currentSlide(n) {
+            showSlides(slideIndex = n);
+        }
+
+        function showSlides(n) {
+            let i;
+            const slides = document.getElementsByClassName("slides");
+            const dots = document.getElementsByClassName("dot");
+            if (n > slides.length) {slideIndex = 1}
+            if (n < 1) {slideIndex = slides.length}
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active-dot", "");
+            }
+            slides[slideIndex-1].style.display = "block";
+            dots[slideIndex-1].className += " active-dot";
+        }
+
         // Fungsi untuk menampilkan pop-up
-        function tampilkanPopUp() {
+            function tampilkanPopUp() {
             const popup = document.getElementById("myPopup");
             popup.classList.add("show");
         }
@@ -156,63 +99,6 @@
 
         // Menambahkan event listener agar pop-up muncul ketika halaman selesai dimuat
         window.onload = tampilkanPopUp;
-
-        let currentIndex = 0;
-        const slides = document.querySelector('.slides');
-        const totalSlides = slides.children.length;
-        const dots = document.querySelectorAll('.dot');
-
-        function showSlide(index) {
-            if (index >= totalSlides) {
-                currentIndex = 0;
-            } else if (index < 0) {
-                currentIndex = totalSlides - 1;
-            } else {
-                currentIndex = index;
-            }
-            slides.style.transform = `translateX(-${currentIndex * 100}%)`;
-            updateDots();
-        }
-
-        function updateDots() {
-            dots.forEach((dot, i) => {
-                dot.className = dot.className.replace(' active', '');
-                if (i === currentIndex) {
-                    dot.className += ' active';
-                }
-            });
-        }
-
-        function handleSwipe() {
-            let startX, endX;
-
-            slides.addEventListener('touchstart', function(event) {
-                startX = event.touches[0].clientX;
-            });
-
-            slides.addEventListener('touchend', function(event) {
-                endX = event.changedTouches[0].clientX;
-                const diffX = startX - endX;
-                if (Math.abs(diffX) > 50) {
-                    if (diffX > 0) {
-                        showSlide(currentIndex + 1);
-                    } else {
-                        showSlide(currentIndex - 1);
-                    }
-                }
-            });
-        }
-
-        handleSwipe();
-
-        function toggleMenu() {
-            const navMenu = document.getElementById('navMenu');
-            if (navMenu.style.display === "flex") {
-                navMenu.style.display = "none";
-            } else {
-                navMenu.style.display = "flex";
-            }
-        }
 
         function scrollToTop() {
             window.scrollTo({
@@ -229,12 +115,27 @@
                 scrollUpButton.style.display = "none";
             }
         };
+        // Swipe functionality
+        const slider = document.getElementById('slider');
+        let startX;
 
-        function currentSlide(index) {
-            showSlide(index);
+        slider.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+        });
+
+        slider.addEventListener('touchend', (e) => {
+            const endX = e.changedTouches[0].clientX;
+            if (startX > endX + 50) {
+                plusSlides(1);
+            } else if (startX < endX - 50) {
+                plusSlides(-1);
+            }
+        });
+
+        function plusSlides(n) {
+            showSlides(slideIndex += n);
         }
 
-        showSlide(currentIndex); // Show the first slide initially
     </script>
 
 </body>
