@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <link rel="stylesheet" href="article.css">
+</head>
+<body>
+
+    <div class="header">
+        <a href="index.html"><img src="logo.png" alt="Logo" class="logo"></a>
+        <div class="nav" id="navMenu">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="disclaimer.html">Disclaimer</a>
+            <a href="privacy-policy.html">Privacy Policy</a>
+            <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
+        </div>
+        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+    </div>
+
+    <div class="content">
+        <article>
+            <h1>Privacy Policy</h1>
+<p>Privacy Policy for <a href="https://colorlib.eu.org/">colorlib.eu.org</a></p>
+<p>If you require any more information or have any questions about our privacy policy, do not hesitate to contact us via the contact form we have provided.</p>
+<p>At colorlib.eu.org, the privacy of our visitors is extremely important to us. This privacy policy document describes the types of personal information is received and collected by colorlib.eu.org and how it is used.</p>
+<h1>File Log</h1>
+<p>Like many other Web sites, colorlib.eu.org makes use of log files. The information inside the log files includes internet protocol (IP) addresses, browser type, Internet Service Provider (ISP), date/time stamp, referring/exit pages, and number of clicks to analyze trends, administer the site, track users&rsquo; movement around the site, and collect demographic information. IP addresses, and other such information are not linked to any personally identifiable information.</p>
+<h1>Cookies and Web Beacons</h1>
+<p>colorlib.eu.org uses cookies to store information about visitors&rsquo; preferences, record user-specific information on which pages the user accesses or visits, customize Web page content based on visitors&rsquo; browser type or other information that the visitor sends via their browser.</p>
+<h1>Cookie DoubleClick DART</h1>
+<p>. :: Google, as a third party vendor, uses cookies to serve ads on colorlib.eu.org.</p>
+<p>. :: Google&rsquo;s use of the DART cookie enables it to serve ads to users based on their visit to colorlib.eu.org and other sites on the Internet.</p>
+<p>. :: Users can opt out of the use of the DART cookie by visiting the Google ad and content network privacy policy at the following URL &ndash; <a data-fr-linked="true" href="http://www.google.com/privacy_ads.html">http://www.google.com/privacy_ads.html</a></p>
+<p>Some of our advertising partners may use cookies and web beacons on our site. Our advertising partners include&hellip;</p>
+<h1>Google Adsense</h1>
+<p>These third-party ad servers or ad networks use technology to the advertisements and links that appear on colorlib.eu.org are sent directly to your browser. They automatically receive your IP address when this happens. Other technologies (such as cookies, JavaScript, or Web Beacons) may also be used by third party ad networks to measure the effectiveness of their advertisements and/or to personalize the advertising content that you see.</p>
+<p>colorlib.eu.org has no access to or control over these cookies that are used by third-party advertisers.</p>
+<p>You should consult the respective privacy policies of these third-party ad servers for more detailed information on their practices as well as for instructions about how to opt-out of certain practices. colorlib.eu.org&rsquo;s privacy policy does not apply to, and we cannot control the activities of, such other advertisers or websites.</p>
+<p>If you wish to disable cookies, you can do so through your individual browser options. More detailed information about cookie management with specific web browsers can be found at the browsers&rsquo; respective websites.</p>
+
+        </article>
+
+    </div>
+
+    <button class="scroll-up" onclick="scrollToTop()">↑</button>
+
+    <script>
+        let currentIndex = 0;
+        const slides = document.querySelector('.slides');
+        const totalSlides = slides.children.length;
+        const dots = document.querySelectorAll('.dot');
+
+        function showSlide(index) {
+            if (index >= totalSlides) {
+                currentIndex = 0;
+            } else if (index < 0) {
+                currentIndex = totalSlides - 1;
+            } else {
+                currentIndex = index;
+            }
+            slides.style.transform = `translateX(-${currentIndex * 100}%)`;
+            updateDots();
+        }
+
+        function updateDots() {
+            dots.forEach((dot, i) => {
+                dot.className = dot.className.replace(' active', '');
+                if (i === currentIndex) {
+                    dot.className += ' active';
+                }
+            });
+        }
+
+        function handleSwipe() {
+            let startX, endX;
+
+            slides.addEventListener('touchstart', function(event) {
+                startX = event.touches[0].clientX;
+            });
+
+            slides.addEventListener('touchend', function(event) {
+                endX = event.changedTouches[0].clientX;
+                if (startX > endX) {
+                    showSlide(currentIndex + 1);
+                } else {
+                    showSlide(currentIndex - 1);
+                }
+            });
+        }
+
+        handleSwipe();
+
+        function toggleMenu() {
+            const navMenu = document.getElementById('navMenu');
+            if (navMenu.style.display === "flex") {
+                navMenu.style.display = "none";
+            } else {
+                navMenu.style.display = "flex";
+            }
+        }
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        window.onscroll = function() {
+            const scrollUpButton = document.querySelector('.scroll-up');
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                scrollUpButton.style.display = "block";
+            } else {
+                scrollUpButton.style.display = "none";
+            }
+        };
+
+        function currentSlide(index) {
+            showSlide(index);
+        }
+
+        showSlide(currentIndex); // Show the first slide initially
+    </script>
+
+</body>
+</html>

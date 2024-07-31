@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Affiliate Disclosure</title>
+    <link rel="stylesheet" href="article.css">
+</head>
+<body>
+
+    <div class="header">
+        <a href="index.html"><img src="logo.png" alt="Logo" class="logo"></a>
+        <div class="nav" id="navMenu">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="disclaimer.html">Disclaimer</a>
+            <a href="privacy-policy.html">Privacy Policy</a>
+            <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
+        </div>
+        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+    </div>
+
+    <div class="content">
+        <article>
+            <h1>Affiliate Disclosure</h1>
+<p>Welcome to the Affiliate Disclosure Page of <a href="https://colorlib.eu.org">colorlib.eu.org</a></p>
+<p>In 2015, the Federal Trade Commission released their new rules for Disclosure Compliance. These rules are set in place to ensure that readers or viewers of web media (blogs, Youtube videos, etc.) know if the blogger/presenter is sponsored, endorsed, or partnered with a different company. In blog terms, the readers need to know if the blogger is making money by sharing a link or product.</p>
+<p>In compliance with the FTC guidelines, please assume the following about links and posts on this site: Any/all of the links colorlib.eu.org are affiliate links of which colorlib.eu.org receive a small compensation from sales of certain items.</p>
+<h2>Affiliate Links</h2>
+<p>Purchases are made on external affiliate company websites: When a reader clicks on an affiliate link located on colorlib.eu.org to purchase an item, the reader buys the item from the seller directly (not from colorlib.eu.org). Amazon and/or other companies pay colorlib.eu.org a small commission or other compensation for promoting their website or products through their affiliate program.</p>
+<p>Prices are exactly the same for you if your purchase is through an affiliate link or a non-affiliate link. You will not pay more by clicking through to the link.</p>
+<p>colorlib.eu.org use two main types of affiliate programs:</p>
+<h3>1. Amazon product affiliate links.</h3>
+<p>colorlib.eu.org is a participant in the <a href="https://affiliate-program.amazon.com/">Amazon Services LLC Associates Program</a>, an affiliate advertising program designed to provide a means for sites to earn advertising fees by advertising and linking to Amazon properties including, but not limited to, amazon.com. Amazon offers a small commission on products sold through their affiliate links. Each of your purchases via our Amazon affiliation links supports our cause at no additional cost to you.</p>
+<p>If a blogger links to an Amazon product (with a special code for affiliates embedded in the link), and a reader places an item in their &ldquo;shopping cart&rdquo; through that link within 24 hours of clicking the link, the blogger gets a small percentage of the sale. Amazon links are not &ldquo;pay per click.&rdquo; If you click on the product link and stay around Amazon and purchase something else, however, I will get commission on that sale.</p>
+<p>Anytime you see a link that looks like astore.com/&hellip; or amazon.com&hellip; it can be assumed that it is an Amazon affiliate link.</p>
+<h3>2. Other Affiliate Schemes</h3>
+<p>colorlib.eu.org does not use other affiliate schemes other than Amazon and Viglink that have already been mentioned in items 1 &amp; 2 above.</p>
+<p>General Advertising</p>
+<p>You may have noticed we also have advertising enabled on our site that is provided by google adsense. Google adsense is not an affiliate scheme, its an advertising agency, and further details can be found on our privacy policy.</p>
+        </article>
+
+    </div>
+
+    <button class="scroll-up" onclick="scrollToTop()">↑</button>
+
+    <script>
+        let currentIndex = 0;
+        const slides = document.querySelector('.slides');
+        const totalSlides = slides.children.length;
+        const dots = document.querySelectorAll('.dot');
+
+        function showSlide(index) {
+            if (index >= totalSlides) {
+                currentIndex = 0;
+            } else if (index < 0) {
+                currentIndex = totalSlides - 1;
+            } else {
+                currentIndex = index;
+            }
+            slides.style.transform = `translateX(-${currentIndex * 100}%)`;
+            updateDots();
+        }
+
+        function updateDots() {
+            dots.forEach((dot, i) => {
+                dot.className = dot.className.replace(' active', '');
+                if (i === currentIndex) {
+                    dot.className += ' active';
+                }
+            });
+        }
+
+        function handleSwipe() {
+            let startX, endX;
+
+            slides.addEventListener('touchstart', function(event) {
+                startX = event.touches[0].clientX;
+            });
+
+            slides.addEventListener('touchend', function(event) {
+                endX = event.changedTouches[0].clientX;
+                if (startX > endX) {
+                    showSlide(currentIndex + 1);
+                } else {
+                    showSlide(currentIndex - 1);
+                }
+            });
+        }
+
+        handleSwipe();
+
+        function toggleMenu() {
+            const navMenu = document.getElementById('navMenu');
+            if (navMenu.style.display === "flex") {
+                navMenu.style.display = "none";
+            } else {
+                navMenu.style.display = "flex";
+            }
+        }
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        window.onscroll = function() {
+            const scrollUpButton = document.querySelector('.scroll-up');
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                scrollUpButton.style.display = "block";
+            } else {
+                scrollUpButton.style.display = "none";
+            }
+        };
+
+        function currentSlide(index) {
+            showSlide(index);
+        }
+
+        showSlide(currentIndex); // Show the first slide initially
+    </script>
+
+</body>
+</html>

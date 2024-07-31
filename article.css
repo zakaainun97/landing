@@ -1,0 +1,149 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #fafafa;
+}
+
+.header {
+    background-color: #FF69B4;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    max-width: 150px;
+    padding: 0 10px;
+}
+
+h1 {
+   color: #222; 
+}
+
+h2 {
+    color: #222; 
+ }
+
+ h3 {
+    color: #222; 
+ }
+
+ p {
+    color: #444; 
+ }
+
+.menu-toggle {
+    font-size: 24px;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    display: none;
+}
+
+.nav {
+    display: flex;
+    justify-content: flex-end;
+    background-color: #FF69B4;
+    flex-wrap: wrap;
+}
+
+.nav a {
+    color: white;
+    padding: 14px 20px;
+    text-decoration: none;
+    text-align: center;
+}
+
+.nav a:hover {
+    background-color: #FFB6C1;
+    border-radius: 8px;
+    transition: ease-in .2s;
+}
+
+.content {
+    padding: 20px;
+}
+
+.slider {
+    position: relative;
+    max-width: 100%;
+    margin: 20px auto;
+    overflow: hidden;
+}
+
+.slides {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+    min-width: 100%;
+    box-sizing: border-box;
+}
+
+.slide img {
+    width: 100%;
+    display: block;
+}
+
+.dots {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.dot {
+    height: 8px;
+    width: 8px;
+    margin: 0 5px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.active {
+    background-color: #FF69B4;
+}
+
+.scroll-up {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #FF69B4;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .nav {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background-color: #FF69B4;
+        position: absolute;
+        top: 60px;
+        right: 0;
+        z-index: 1;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .nav a {
+        padding: 10px;
+        border-bottom: 1px solid #FFB6C1;
+    }
+
+    .header {
+        flex-direction: row;
+    }
+}
