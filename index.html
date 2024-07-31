@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,14 +10,14 @@
 
 <section class="hero">
     <video autoplay muted loop>
-        <source src="image/video.mp4" type="video/mp4" alt="freepik.com">
+        <source src="video.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
     <nav>
         <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
         <ul id="menu">
             <li><a href="#home">Home</a></li>
-            <li><a href="article.html">About</a></li>
+            <li><a href="#about">About</a></li>
             <li><a href="#services">Services</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
@@ -32,7 +32,7 @@
 <section class="hero-articles">
     <div class="article">
         <div class="image-container">
-            <img src="image/thumb1.png" alt="Thumbnail 1">
+            <img src="thumb1.jpg" alt="Thumbnail 1">
         </div>
     </div>
     <div class="article">
@@ -56,10 +56,19 @@
     <p>&copy; 2024 Your Company. All rights reserved.</p>
 </footer>
 
- <button onclick="topFunction()" id="scrollUpBtn" title="Go to top">&#8679;</button>
+    <button onclick="topFunction()" id="scrollUpBtn" title="Go to top">&#8679;</button>
 
 <script>
-    // Scroll Up Button
+    function toggleMenu() {
+        var menu = document.getElementById("menu");
+        if (menu.style.display === "block") {
+            menu.style.display = "none";
+        } else {
+            menu.style.display = "block";
+        }
+    }
+
+// Scroll Up Button
         const scrollUpBtn = document.getElementById("scrollUpBtn");
 
         window.onscroll = function() {
@@ -78,6 +87,7 @@
             document.body.scrollTop = 0;
             document.documentElement.scrollTop = 0;
         }
+
 </script>
 
 </body>
