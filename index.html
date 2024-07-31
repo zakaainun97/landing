@@ -10,11 +10,12 @@
 
 <section class="hero">
     <video autoplay muted loop>
-        <source src="video.mp4" type="video/mp4">
+        <source src="video.mp4" type="video/mp4" alt="freepik.com">
         Your browser does not support the video tag.
     </video>
     <nav>
-        <ul>
+        <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
+        <ul id="menu">
             <li><a href="#home">Home</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#services">Services</a></li>
@@ -27,36 +28,59 @@
     </div>
 </section>
 
-<div class="judul">
-<h1>Ini Judul Bagian</h1>
-
+<h2 class="section-title">Our Articles</h2>
 <section class="hero-articles">
     <div class="article">
-        <img src="thumb1.jpg" alt="Thumbnail 1">
-        <h2>Article 1</h2>
-        <p>Some interesting content goes here.</p>
+        <div class="image-container">
+            <img src="thumb1.png" alt="Thumbnail 1">
+        </div>
     </div>
     <div class="article">
-        <img src="thumb2.jpg" alt="Thumbnail 2">
-        <h2>Article 2</h2>
-        <p>Some interesting content goes here.</p>
+        <div class="image-container">
+            <img src="thumb2.jpg" alt="Thumbnail 2">
+        </div>
     </div>
     <div class="article">
-        <img src="thumb3.jpg" alt="Thumbnail 3">
-        <h2>Article 3</h2>
-        <p>Some interesting content goes here.</p>
+        <div class="image-container">
+            <img src="thumb3.jpg" alt="Thumbnail 3">
+        </div>
     </div>
     <div class="article">
-        <img src="thumb4.jpg" alt="Thumbnail 4">
-        <h2>Article 4</h2>
-        <p>Some interesting content goes here.</p>
+        <div class="image-container">
+            <img src="thumb4.jpg" alt="Thumbnail 4">
+        </div>
     </div>
 </section>
-</div>
 
 <footer>
     <p>&copy; 2024 Your Company. All rights reserved.</p>
 </footer>
+
+<button class="scroll-to-top" onclick="scrollToTop()">&#8679;</button>
+
+<script>
+    function toggleMenu() {
+        var menu = document.getElementById("menu");
+        if (menu.style.display === "block") {
+            menu.style.display = "none";
+        } else {
+            menu.style.display = "block";
+        }
+    }
+
+    window.addEventListener('scroll', function() {
+        var scrollToTopButton = document.querySelector('.scroll-to-top');
+        if (window.scrollY > 300) {
+            scrollToTopButton.classList.add('show');
+        } else {
+            scrollToTopButton.classList.remove('show');
+        }
+    });
+
+    function scrollToTop() {
+        window.scrollTo({top: 0, behavior: 'smooth'});
+    }
+</script>
 
 </body>
 </html>
