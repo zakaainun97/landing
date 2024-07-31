@@ -43,12 +43,34 @@
                 <span class="dot" onclick="currentSlide(2)"></span>
             </div>
         </div>
+<!-- style 1 end -->
 
+    </div>
+
+    <div id="myPopup" class="popup">
+        <button class="close-btn" onclick="tutupPopUp()">X</button>
+        <p>We may receive a small affiliate commission should you make a purchase from product links contained in our articles. Check out <a href="https://colorlib.eu.org/affiliate-disclosure.html">our affiliate disclosure</a> for further information. We appreciate your support!</p>
     </div>
 
     <button class="scroll-up" onclick="scrollToTop()">↑</button>
 
     <script>
+
+        // Fungsi untuk menampilkan pop-up
+            function tampilkanPopUp() {
+            const popup = document.getElementById("myPopup");
+            popup.classList.add("show");
+        }
+
+        // Fungsi untuk menutup pop-up
+        function tutupPopUp() {
+            const popup = document.getElementById("myPopup");
+            popup.classList.remove("show");
+        }
+
+        // Menambahkan event listener agar pop-up muncul ketika halaman selesai dimuat
+        window.onload = tampilkanPopUp;
+
         let currentIndex = 0;
         const slides = document.querySelector('.slides');
         const totalSlides = slides.children.length;
