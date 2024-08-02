@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="image/fav.png" type=".png">
+    <title>Halaman Artikel</title>
+    <link rel="stylesheet" href="css/slider.css">
+</head>
+<body>
+
+    <div class="header">
+        <a href="https://colorlib.eu.org"><img src="image/logo.png" alt="Logo" class="logo"></a>
+        <div class="nav" id="navMenu">
+            <a href="https://colorlib.eu.org/">Home</a>
+            <a href="https://colorlib.eu.org/about.html">About</a>
+            <a href="https://colorlib.eu.org/disclaimer.html">Disclaimer</a>
+            <a href="https://colorlib.eu.org/privacy-policy.html">Privacy Policy</a>
+            <a href="https://colorlib.eu.org/affiliate-disclosure.html">Affiliate Disclosure</a>
+        </div>
+        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+    </div>
+
+    <div class="content">
+        <article class="content">
+            <h1>Judul Artikel</h1>
+            <p>Isi artikel di sini.. aehfauhuhbfaisdnva aisufhaihfaisuhfuaygha auhf aiuhg8augh agha gagha8sdugha guha8fha g8asghas8g hs8ghs8 dhg8s.</p>
+        </article>
+        <div class="flex-container">
+            <img src="image/25 Summer/10/10 - 1.png" alt="" style="width:60%;">
+        </div>
+        <figcaption class="caption">@Kelli Testa</figcaption>
+        <h3>Get This Look</h3>
+
+        <!-- Slider 1-->
+        <div class="slider-container" id="slider1">
+            <div class="slider">
+                <div class="slide active">
+                    <img src="image/25 Summer/1/1 - 1.PNG" alt="Slide 1">
+                </div>
+                <div class="slide">
+                    <img src="image/25 Summer/10/10 - 1.png" alt="Slide 2">
+                </div>
+                <div class="slide">
+                    <img src="https://via.placeholder.com/400x200?text=Slide+3" alt="Slide 3">
+                </div>
+                <div class="slide">
+                    <img src="https://via.placeholder.com/400x200?text=Slide+4" alt="Slide 4">
+                </div>
+                <div class="slide">
+                    <img src="https://via.placeholder.com/400x200?text=Slide+5" alt="Slide 5">
+                </div>
+            </div>
+            <button class="prev" onclick="moveSlide('slider1', -1)">&#10094;</button>
+            <button class="next" onclick="moveSlide('slider1', 1)">&#10095;</button>
+        </div>
+        <!-- End Slider 1-->
+
+        <!-- Slider 2-->
+        <div class="slider-container" id="slider2">
+            <div class="slider">
+                <div class="slide active">
+                    <img src="image/25 Summer/10/10 - 1.png" alt="Slide 1">
+                </div>
+                <div class="slide">
+                    <img src="image/25 Summer/1/1 - 1.PNG" alt="Slide 2">
+                </div>
+                <div class="slide">
+                    <img src="https://via.placeholder.com/400x200?text=Slide+3" alt="Slide 3">
+                </div>
+            </div>
+            <button class="prev" onclick="moveSlide('slider2', -1)">&#10094;</button>
+            <button class="next" onclick="moveSlide('slider2', 1)">&#10095;</button>
+        </div>
+        <!-- End Slider 2-->
+
+                <!-- Slider 3-->
+                <div class="slider-container" id="slider3">
+                    <div class="slider">
+                        <div class="slide active">
+                            <img src="image/25 Summer/10/10 - 1.png" alt="Slide 1">
+                        </div>
+                        <div class="slide">
+                            <img src="https://via.placeholder.com/400x200?text=Slide+2" alt="Slide 2">
+                        </div>
+                        <div class="slide">
+                            <img src="image/25 Summer/1/1 - 1.PNG" alt="Slide 3">
+                        </div>
+                    </div>
+                    <button class="prev" onclick="moveSlide('slider3', -1)">&#10094;</button>
+                    <button class="next" onclick="moveSlide('slider3', 1)">&#10095;</button>
+                </div>
+                <!-- End Slider 3-->
+
+    </div>
+
+    <div id="myPopup" class="popup">
+        <button class="close-btn" onclick="tutupPopUp()">X</button>
+        <p>We may receive a small affiliate commission should you make a purchase from product links contained in our articles. Check out <a href="https://colorlib.eu.org/affiliate-disclosure.html">our affiliate disclosure</a> for further information. We appreciate your support!</p>
+    </div>
+
+    <button class="scroll-up" onclick="scrollToTop()">↑</button>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
